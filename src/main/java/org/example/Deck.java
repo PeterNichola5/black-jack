@@ -1,9 +1,7 @@
 package org.example;
 import java.util.ArrayList;
 
-public class Deck {
-
-    private ArrayList<Card> cards = new ArrayList<Card>();
+public class Deck extends ArrayList<Card> {
 
     public Deck() {
         populate();
@@ -30,33 +28,33 @@ public class Deck {
                     break;
             }
             for(int j = 1; j <= 13; j++) {
-                cards.add(new Card(suit, j));
+                this.add(new Card(suit, j));
             }
         }
     }
     private void swapCards(int index1, int index2) {
-        Card card1 = cards.get(index1);
-        Card card2 = cards.set(index2, card1);
-        cards.set(index1, card2);
+        Card card1 = this.get(index1);
+        Card card2 = this.set(index2, card1);
+        this.set(index1, card2);
     }
     public void shuffle() {
-        for(int i = 0; i < cards.size(); i++) {
+        for(int i = 0; i < this.size(); i++) {
             swapCards(i, (int)Math.floor(Math.random() * 51));
         }
     }
 
     public Card drawCard() {
-        return cards.remove(0);
+        return this.remove(0);
     }
 
     public void view() {
-        for(Card card : cards) {
+        for(Card card : this) {
             System.out.println(card.getName());
         }
     }
 
     public void reset() {
-        cards.clear();
+        this.clear();
         populate();
     }
 
