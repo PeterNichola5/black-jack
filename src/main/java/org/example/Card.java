@@ -1,13 +1,24 @@
 package org.example;
 
+
+//The Card class holds various properties that mimic a playing card (suit, number, name, etc.)
 public class Card extends Object {
+
+    //Instantiating properties
     private String name;
     private int value;
     private String suit;
+    private String color;
 
+    //Constructor sets the card's value, suit, name, and color
     public Card(String suit, int value) {
+
+        //Initiating properties
         this.value = value;
         this.suit = suit;
+
+        //Uses the suit to
+        color = suit.toLowerCase().equals("hearts") || suit.toLowerCase().equals("diamonds") ? "red" : "black";
 
         switch(value) {
             case 1:
