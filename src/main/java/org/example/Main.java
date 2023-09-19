@@ -42,8 +42,6 @@ public class Main {
     static ArrayList<Card> houseHand = new ArrayList<>();
 
     //Initializing variables
-    static int playerScore = 0;
-    static int houseScore = 0;
     static boolean didWin;
 
     //Constant for Black Jack
@@ -100,8 +98,6 @@ public class Main {
     public static void setUp() throws InterruptedException {
 
         //Zeroes out both hands and scores
-        playerScore = 0;
-        houseScore = 0;
         playerHand.clear();
         houseHand.clear();
 
@@ -117,17 +113,17 @@ public class Main {
         for(Card card : playerHand) {
             Thread.sleep(500);
             System.out.println("You drew a " + card.getName() + ".");
-            playerScore += card.getValue();
+            ScoreBoard.addToPlayerScore(card.getValue());
         }
     }
 
     //prompts the user for input
     public static void prompt() throws InterruptedException {
         Thread.sleep(500);
-        System.out.println("Your current score: " + playerScore + "\n");
+        System.out.println("Your current score: " + ScoreBoard.getPlayerScore() + "\n");
 
         //If statement determines whether the player has busted or not
-        if(playerScore < BLACK_JACK_VALUE) {
+        if(ScoreBoard.getPlayerScore() < BLACK_JACK_VALUE) {
 
             Thread.sleep(750);
 
@@ -152,11 +148,11 @@ public class Main {
                 //Informs player that it is now the house's turn
                 Thread.sleep(500);
                 System.out.print("\n");
-                fancyPrint("You chose to stay at " + playerScore + ". ");
+                fancyPrint("You chose to stay at " + ScoreBoard.getPlayerScore() + ". ");
                 Thread.sleep(500);
 
                 //Uses a ternary operator to respond to the user's decision based on how the house plays
-                fancyPrint((playerScore >= HOUSE_MIN_VALUE ? "Good choice!" : "That may not be enough...")); //TODO: Multiple feedback statements (see above)
+                fancyPrint((ScoreBoard.getPlayerScore() >= HOUSE_MIN_VALUE ? "Good choice!" : "That may not be enough...")); //TODO: Multiple feedback statements (see above)
                 System.out.println();
                 Thread.sleep(1000);
 
@@ -169,12 +165,12 @@ public class Main {
                 Thread.sleep(700);
 
                 //Reminds the user of their current score and prompts them for input again
-                System.out.println("Your current score is: " + playerScore);
+                System.out.println("Your current score is: " + ScoreBoard.getPlayerScore());
                 prompt();
             }
 
         //Checks if the player has Black Jack
-        } else if(playerScore == BLACK_JACK_VALUE) {
+        } else if(ScoreBoard.getPlayerScore() == BLACK_JACK_VALUE) {
 
             //Informs the player that they have Black Jack, resulting in an automatic win
             Thread.sleep(750);
@@ -203,7 +199,7 @@ public class Main {
 
         //Adds the drawn card to playerHand and updates the player's score
         playerHand.add(drawnCard);
-        playerScore += drawnCard.getValue();
+        ScoreBoard.addToPlayerScore(drawnCard.getValue());
         Thread.sleep(750);
 
         //Informs the player of the card they have just drawn and prompts them for input (see the 'prompt' method)
@@ -228,22 +224,22 @@ public class Main {
         for(Card card : houseHand) {
             Thread.sleep(750);
             System.out.println("The house drew a " + card.getName() + ".");
-            houseScore += card.getValue();
+            ScoreBoard.addToHouseScore(card.getValue());
         }
 
         //The following while loop will run until the house has a score of at least 17 (HOUSE_MIN_VALUE)
-        while(houseScore < HOUSE_MIN_VALUE) {
+        while(ScoreBoard.getHouseScore() < HOUSE_MIN_VALUE) {
 
             //Displays the house score and informs the player that the house has chosen to hit
             Thread.sleep(750);
-            System.out.println("The house currently has a score of " + houseScore + ".\n");
+            System.out.println("The house currently has a score of " + ScoreBoard.getHouseScore() + ".\n");
             Thread.sleep(1000);
             System.out.println("The house is hitting");
 
             //Draws a card from 'deck', adds it to the house's hand, and updates the house's score
             Card cardDrawn = deck.drawCard();
             houseHand.add(cardDrawn);
-            houseScore += cardDrawn.getValue();
+            ScoreBoard.addToHouseScore(cardDrawn.getValue());
 
             //Displays the card that the house drew
             Thread.sleep(750);
@@ -251,7 +247,7 @@ public class Main {
         }
 
         //Checks if the house has Black Jack
-        if(houseScore == BLACK_JACK_VALUE) {
+        if(ScoreBoard.getHouseScore() == BLACK_JACK_VALUE) {
 
             //Informs the player that the house got Black Jack, resulting in an automatic loss
             Thread.sleep(750);
@@ -265,10 +261,10 @@ public class Main {
 
             //Displays the house's final score
             Thread.sleep(750);
-            System.out.println("The house currently has a score of " + houseScore + ".\n");
+            System.out.println("The house currently has a score of " + ScoreBoard.getHouseScore() + ".\n");
 
             //Checks if the house busted
-            if(houseScore > BLACK_JACK_VALUE) {
+            if(ScoreBoard.getHouseScore() > BLACK_JACK_VALUE) {
 
                 //Informs the player that the house's score was greater than 21, resulting in a BUST
                 Thread.sleep(350);
@@ -282,14 +278,14 @@ public class Main {
 
                 //Informs the player that the house has chosen to stay
                 Thread.sleep(1000);
-                System.out.println("The house has chosen to stay at " + houseScore + ".");
+                System.out.println("The house has chosen to stay at " + ScoreBoard.getHouseScore() + ".");
 
                 //Checks whether the player or the house has the higher score
-                if(playerScore > houseScore) {
+                if(ScoreBoard.getPlayerScore() > ScoreBoard.getHouseScore()) {
 
                     //Informs the player that their score is higher than the house's
                     Thread.sleep(750);
-                    System.out.println("Your score of " + playerScore + " beats the house's score of " + houseScore);
+                    System.out.println("Your score of " + ScoreBoard.getPlayerScore() + " beats the house's score of " + ScoreBoard.getHouseScore());
                     Thread.sleep(750);
 
                     //Sets game result
@@ -300,7 +296,7 @@ public class Main {
 
                     //Informs the player that their score is lower than the house's
                     Thread.sleep(750);
-                    System.out.println("The house's score of " + houseScore + " beats your score of " + playerScore);
+                    System.out.println("The house's score of " + ScoreBoard.getHouseScore() + " beats your score of " + ScoreBoard.getPlayerScore());
                     Thread.sleep(750);
 
                     //Sets game result
