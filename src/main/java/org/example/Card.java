@@ -18,27 +18,27 @@ public class Card extends Object {
         this.suit = suit;
 
         //Uses the suit to determine whether the color of the card is black or red
-        color = suit.toLowerCase().equals("hearts") || suit.toLowerCase().equals("diamonds") ? "red" : "black";
+        this.color = this.suit.toLowerCase().equals("hearts") || this.suit.toLowerCase().equals("diamonds") ? "red" : "black";
 
         //This switch statement takes the value of a card and determines its name based on that and the suit
         switch(value) {
             case 1:
-                name = "Ace of " + (String.valueOf(suit));
+                this.name = "Ace of " + (String.valueOf(suit));
                 break;
             case 11:
-                name = "Jack of " + (String.valueOf(suit));
+                this.name = "Jack of " + (String.valueOf(suit));
                 this.value = 10;
                 break;
             case 12:
-                name = "Queen of " + (String.valueOf(suit));
+                this.name = "Queen of " + (String.valueOf(suit));
                 this.value = 10;
                 break;
             case 13:
-                name = "King of " + (String.valueOf(suit));
+                this.name = "King of " + (String.valueOf(suit));
                 this.value = 10;
                 break;
             default:
-                name = value + " of " + (String.valueOf(suit));
+                this.name = value + " of " + (String.valueOf(suit));
                 break;
         }
     }

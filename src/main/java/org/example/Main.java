@@ -34,12 +34,12 @@ public class Main {
     //Initializing Deck and Scanner
     static Deck deck = new Deck();
     static Scanner userInput = new Scanner(System.in);
-
+    static CardTable cardTable;
 
     //Initializing ArrayLists to represent the 'areas of play'
-    static ArrayList<Card> discardPile = new ArrayList<>();
-    static ArrayList<Card> playerHand = new ArrayList<>();
-    static ArrayList<Card> houseHand = new ArrayList<>();
+    static List<Card> discardPile = new ArrayList<>();
+    static List<Card> playerHand = new ArrayList<>();
+    static List<Card> houseHand = new ArrayList<>();
 
     //Initializing variables
     static boolean didWin;
@@ -51,31 +51,9 @@ public class Main {
     //main method
     public static void main(String[] args) throws InterruptedException {
 
-        //Begin game by shuffling the deck
-        deck.shuffle();
+        cardTable = new CardTable();
+        cardTable.startNewGame();
 
-        //Sequence for program startup
-        System.out.println("\n\nWelcome to Black Jack! Try to get as close to 21 as possible, but don't go over!\n".toUpperCase());
-        Thread.sleep(2500);
-        System.out.println("(press enter to start)");
-
-        userInput.nextLine();
-
-        Thread.sleep(1000);
-        System.out.print("LOADING");
-        Thread.sleep(1500);
-        System.out.print(" .");
-        Thread.sleep(1500);
-        System.out.print(" .");
-        Thread.sleep(1500);
-        System.out.print(" .");
-        Thread.sleep(1500);
-        System.out.println();
-        Thread.sleep(1000);
-        System.out.println("Starting hand: \n");
-
-        //Initializes and begins the game loop
-        setUp();
         prompt();
 
 

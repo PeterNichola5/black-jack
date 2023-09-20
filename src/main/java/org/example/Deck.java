@@ -9,7 +9,7 @@ public class Deck extends ArrayList<Card> {
 
     //Deck constructor automatically fills it with all 52 cards in a standard deck (excludes jokers)
     public Deck() {
-        populate();
+        this.populate();
     }
 
     //This method is used to fill the deck with cards
