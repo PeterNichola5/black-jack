@@ -1,9 +1,9 @@
-package org.example;
+package org.project.utils;
 
 import java.util.Scanner;
 
-public class Display {
-    public Display() {
+public class DisplayUtils {
+    public DisplayUtils() {
 
     }
 

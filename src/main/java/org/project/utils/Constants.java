@@ -1,4 +1,4 @@
-package org.example;
+package org.project.utils;
 
 public class Constants {
     public static final int BLACK_JACK_VALUE = 21;

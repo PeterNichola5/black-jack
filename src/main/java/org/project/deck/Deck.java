@@ -1,4 +1,5 @@
-package org.example;
+package org.project.deck;
+
 import java.util.ArrayList;
 
 //TODO: add joker toggle?

@@ -1,4 +1,10 @@
-package org.example;
+package org.project;
+
+import org.project.deck.Card;
+import org.project.deck.Deck;
+import org.project.players.House;
+import org.project.utils.Constants;
+import org.project.utils.DisplayUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +13,9 @@ import java.util.Stack;
 
 public class CardTable {
     private Deck deck;
-    private Display display = new Display();
+    private DisplayUtils displayUtils = new DisplayUtils();
+
+    private static final House house = new House();
     private Stack<Card> discardPile;
     private List<Card> playerHand;
     private List<Card> houseHand;
@@ -27,7 +35,7 @@ public class CardTable {
         playerHand.clear();
         houseHand.clear();
 
-        display.startUp(userInput);
+        displayUtils.startUp(userInput);
     }
 
     public void startNewGame() {
@@ -41,13 +49,13 @@ public class CardTable {
 
         Card drawnCard = deck.drawCard();
         this.playerHand.add(drawnCard);
-        display.newCard(drawnCard.getName(), "You");
-        ScoreBoard.addToPlayerScore(drawnCard.getValue());
+        displayUtils.newCard(drawnCard.getName(), "You");
+        ScoreBoard.addToPlayerScore(drawnCard.getRank());
 
         drawnCard = deck.drawCard();
         this.playerHand.add(drawnCard);
-        display.newCard(drawnCard.getName(), "You");
-        ScoreBoard.addToPlayerScore(drawnCard.getValue());
+        displayUtils.newCard(drawnCard.getName(), "You");
+        ScoreBoard.addToPlayerScore(drawnCard.getRank());
     }
 
     private void gameRuntime() {

@@ -1,4 +1,7 @@
-package org.example;
+package org.project;
+
+import org.project.deck.Card;
+import org.project.deck.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +94,7 @@ public class Main {
         for(Card card : playerHand) {
             Thread.sleep(500);
             System.out.println("You drew a " + card.getName() + ".");
-            ScoreBoard.addToPlayerScore(card.getValue());
+            ScoreBoard.addToPlayerScore(card.getRank());
         }
     }
 
@@ -177,7 +180,7 @@ public class Main {
 
         //Adds the drawn card to playerHand and updates the player's score
         playerHand.add(drawnCard);
-        ScoreBoard.addToPlayerScore(drawnCard.getValue());
+        ScoreBoard.addToPlayerScore(drawnCard.getRank());
         Thread.sleep(750);
 
         //Informs the player of the card they have just drawn and prompts them for input (see the 'prompt' method)
@@ -202,7 +205,7 @@ public class Main {
         for(Card card : houseHand) {
             Thread.sleep(750);
             System.out.println("The house drew a " + card.getName() + ".");
-            ScoreBoard.addToHouseScore(card.getValue());
+            ScoreBoard.addToHouseScore(card.getRank());
         }
 
         //The following while loop will run until the house has a score of at least 17 (HOUSE_MIN_VALUE)
@@ -217,7 +220,7 @@ public class Main {
             //Draws a card from 'deck', adds it to the house's hand, and updates the house's score
             Card cardDrawn = deck.drawCard();
             houseHand.add(cardDrawn);
-            ScoreBoard.addToHouseScore(cardDrawn.getValue());
+            ScoreBoard.addToHouseScore(cardDrawn.getRank());
 
             //Displays the card that the house drew
             Thread.sleep(750);
